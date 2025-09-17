@@ -14,3 +14,6 @@ scispacy>=0.5.3
 # If you want medical NLP, install SciSpaCy model:
 #   python -m spacy download en_core_web_sm
 #   pip install https://github.com/allenai/scispacy/releases/download/v0.5.3/en_core_sci_md-0.5.3-py3-none-any.whl
+openai>=1.0.0
+sentencepiece
+accelerate
