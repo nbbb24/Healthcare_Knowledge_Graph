@@ -1,0 +1,142 @@
+{
+    "Demographics": {
+      "patient_id": {
+        "type": "string",
+        "description": "Unique patient identifier"
+      },
+      "date_of_birth": {
+        "type": "date",
+        "description": "Patient date of birth"
+      },
+      "patient_age": {
+        "type": "integer",
+        "rule": "Derived from date_of_birth and date_of_service, must be >= 18 at time of surgery"
+      },
+      "sex": {
+        "type": "enum",
+        "values": ["M", "F", "Other"],
+        "description": "Patient sex"
+      }
+    },
+    "Encounter": {
+      "encounter_id": {
+        "type": "string",
+        "description": "Encounter or surgery event ID"
+      },
+      "date_of_service": {
+        "type": "date",
+        "description": "Date of surgery or evaluation"
+      },
+      "provider_type": {
+        "type": "string",
+        "description": "Type of provider (e.g., Bariatric Surgeon)"
+      }
+    },
+    "Anthropometrics": {
+      "patient_bmi": {
+        "type": "float",
+        "rule": ">= 40 OR >= 35 with comorbidity"
+      },
+      "patient_weight": {
+        "type": "float",
+        "description": "Current weight in kilograms or pounds"
+      },
+      "patient_height": {
+        "type": "float",
+        "description": "Height in centimeters or inches"
+      }
+    },
+    "Diagnosis": {
+      "diagnosis_code": {
+        "type": "ICD-10",
+        "examples": [
+          "E66.01", "E66.09", "E66.1", "E66.2", "E66.3", "E66.8",
+          "E66.811", "E66.812", "E66.813", "E66.89", "E66.9",
+          "E88.82", "Z68.20", "Z68.29", "Z68.30", "Z68.34", "Z68.35",
+          "Z68.39", "Z68.41", "Z68.45", "Z68.51", "Z68.56", "Z98.84"
+        ],
+        "description": "Relevant ICD-10 diagnosis codes for obesity and related conditions"
+      },
+      "comorbidity_conditions": {
+        "type": "array",
+        "values": ["diabetes", "hypertension", "cardiomyopathy", "cardiovascular", "sleep_apnea", "pickwickian"],
+        "description": "Comorbid conditions relevant to bariatric surgery"
+      },
+      "comorbidity_flag": {
+        "type": "boolean",
+        "rule": "True if patient has at least one qualifying comorbidity"
+      }
+    },
+    "Procedure": {
+      "procedure_code": {
+        "type": "CPT/ICD-10-PCS",
+        "examples": [
+          "43644", "43770", "43775", "43842", "43845", "43846",
+          "43290", "43291", "43632", "43633", "43645", "43659",
+          "43771", "43772", "43773", "43774", "43843", "43847",
+          "43848", "43886", "43887", "43888", "43999"
+        ],
+        "description": "Bariatric surgery procedure codes considered in policy"
+      },
+      "surgical_procedure_type": {
+        "type": "enum",
+        "values": ["biliopancreatic", "gastric_banding", "roux_en_y", "sleeve_gastrectomy", "vertical_banded"],
+        "description": "Categorized type of surgical procedure"
+      },
+      "revision_flag": {
+        "type": "boolean",
+        "description": "Indicates whether procedure is a revision/reoperation"
+      }
+    },
+    "Documentation": {
+      "weight_loss_program_flag": {
+        "type": "boolean",
+        "description": "Evidence of participation in structured weight loss program"
+      },
+      "program_duration_months": {
+        "type": "integer",
+        "rule": "Typically 6–12 months continuous participation"
+      },
+      "conservative_therapy_flag": {
+        "type": "boolean",
+        "description": "Attempted conservative therapy (diet, exercise, behavior modification)"
+      },
+      "medical_evaluation_flag": {
+        "type": "boolean",
+        "description": "Pre-operative medical evaluation completed"
+      },
+      "mental_health_evaluation_flag": {
+        "type": "boolean",
+        "description": "Pre-operative psychological/psychiatric evaluation completed"
+      },
+      "preoperative_education_flag": {
+        "type": "boolean",
+        "description": "Completed education on risks, benefits, and follow-up requirements"
+      },
+      "treatment_plan_flag": {
+        "type": "boolean",
+        "description": "Presence of comprehensive treatment plan covering pre- and post-operative care"
+      }
+    },
+    "Reoperation": {
+      "reoperation_flag": {
+        "type": "boolean",
+        "description": "Indicates whether this is a revision surgery"
+      },
+      "surgical_complications": {
+        "type": "array",
+        "values": ["erosion", "fistula", "gerd", "leakage", "obstruction", "stricture"],
+        "description": "Surgical complications prompting reoperation"
+      },
+      "reoperation_reason": {
+        "type": "string",
+        "description": "Reason for reoperation"
+      }
+    },
+    "Coverage": {
+      "medical_necessity_flag": {
+        "type": "boolean",
+        "description": "Indicates whether surgery meets policy criteria for medical necessity"
+      }
+    }
+  }

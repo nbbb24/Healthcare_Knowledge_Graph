@@ -1,0 +1,82 @@
+[
+  {
+    "field": "patient_age",
+    "type": "integer",
+    "example_or_rule": ">= 18 years"
+  },
+  {
+    "field": "patient_bmi",
+    "type": "float",
+    "example_or_rule": ">= 40 OR >= 35 with comorbidity"
+  },
+  {
+    "field": "patient_weight",
+    "type": "float",
+    "example_or_rule": "Current weight in kg/lbs"
+  },
+  {
+    "field": "procedure_code",
+    "type": "string",
+    "example_or_rule": "43290, 43291, 43632, 43633, 43644, 43645, 43659, 43770, 43771, 43772, 43773, 43774, 43775, 43842, 43843, 43845, 43846, 43847, 43848, 43886, 43887, 43888, 43999"
+  },
+  {
+    "field": "diagnosis_code",
+    "type": "string",
+    "example_or_rule": "E66.01, E66.09, E66.1, E66.2, E66.3, E66.8, E66.811, E66.812, E66.813, E66.89, E66.9, E88.82, S10, S17, S20, S21, S25, S26, S30, S42, S45, S46, S50, S51, S54, Z46.51, Z68.20, Z68.29, Z68.30, Z68.34, Z68.35, Z68.39, Z68.41, Z68.45, Z68.51, Z68.56, Z98.84"
+  },
+  {
+    "field": "comorbidity_conditions",
+    "type": "array",
+    "example_or_rule": "cardiomyopathy, cardiovascular, diabetes, hypertension, pickwickian, sleep_apnea"
+  },
+  {
+    "field": "surgical_procedure_type",
+    "type": "string",
+    "example_or_rule": "biliopancreatic, gastric_banding, roux_en_y, sleeve_gastrectomy, vertical_banded"
+  },
+  {
+    "field": "weight_loss_program_flag",
+    "type": "boolean",
+    "example_or_rule": "Required documentation"
+  },
+  {
+    "field": "medical_evaluation_flag",
+    "type": "boolean",
+    "example_or_rule": "Required documentation"
+  },
+  {
+    "field": "mental_health_evaluation_flag",
+    "type": "boolean",
+    "example_or_rule": "Required documentation"
+  },
+  {
+    "field": "preoperative_education_flag",
+    "type": "boolean",
+    "example_or_rule": "Required documentation"
+  },
+  {
+    "field": "treatment_plan_flag",
+    "type": "boolean",
+    "example_or_rule": "Required documentation"
+  },
+  {
+    "field": "conservative_therapy_flag",
+    "type": "boolean",
+    "example_or_rule": "Required documentation"
+  },
+  {
+    "field": "reoperation_flag",
+    "type": "boolean",
+    "example_or_rule": "Indicates revision surgery"
+  },
+  {
+    "field": "surgical_complications",
+    "type": "array",
+    "example_or_rule": "erosion, fistula, gerd, leakage, obstruction, stricture"
+  },
+  {
+    "field": "medical_necessity_flag",
+    "type": "boolean",
+    "example_or_rule": "Required for coverage"
+  }
+]
