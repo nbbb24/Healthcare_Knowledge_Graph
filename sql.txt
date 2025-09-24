@@ -1,0 +1,15 @@
+SELECT *
+FROM patients
+WHERE patient_age >= 18
+  AND procedure_code IN ('43644','43645','43770','43771','43772','43773','43774',
+                         '43775','43842','43843','43845','43846','43847','43848',
+                         '43886','43887','43888')
+  AND (
+        patient_bmi >= 40
+        OR (patient_bmi >= 35 AND comorbidity_flag = 1)
+      )
+  AND weight_loss_program_flag = TRUE
+  AND conservative_therapy_flag = TRUE
+  AND (medical_evaluation_flag = TRUE AND mental_health_evaluation_flag = TRUE)
+  AND preoperative_education_flag = TRUE
+  AND treatment_plan_flag = TRUE;

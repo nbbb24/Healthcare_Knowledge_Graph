@@ -1,0 +1,5 @@
+SELECT *
+FROM patients
+WHERE patient_age >= 18
+AND procedure_code IN eligible_bariatric_procedure_codes
+AND (patient_bmi >= 40 OR (patient_bmi >= 35 AND comorbidity_flag = 1));

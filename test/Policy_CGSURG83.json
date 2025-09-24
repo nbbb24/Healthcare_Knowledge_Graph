@@ -1,0 +1,34 @@
+[
+    {
+    "name": "Bariatric Surgery Eligibility Criteria",
+    "guideline_number": null,
+    "description": "Criteria for determining eligibility for bariatric surgery, including age, BMI, and comorbid condition requirements.",
+    "raw_text": "Gastric bypass and gastric restrictive procedures are considered medically necessary when all of the following criteria are met: Individual is age 18 years or older; the recommended surgery is one of certain procedures; a BMI of 40 or greater, or 35 or greater with an obesity-related comorbid condition.",
+    "restrictions": [
+    {
+    "condition": "Age ≥ 18",
+    "rule": "patient_age >= 18",
+    "codes": [],
+    "logic": "AND"
+    },
+    {
+    "condition": "Procedure is one of eligible bariatric types",
+    "rule": "procedure_code IN eligible_bariatric_procedure_codes",
+    "codes": [],
+    "logic": "AND"
+    },
+    {
+    "condition": "BMI ≥ 40",
+    "rule": "patient_bmi >= 40",
+    "codes": [],
+    "logic": "OR"
+    },
+    {
+    "condition": "BMI ≥ 35 with comorbidity",
+    "rule": "patient_bmi >= 35 AND comorbidity_flag = 1",
+    "codes": [],
+    "logic": "OR"
+    }
+    ]
+    }
+    ]

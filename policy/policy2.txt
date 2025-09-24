@@ -1,30 +1,5 @@
-Clinical Guideline
-Subject: Heart Disease Management and Interventions
-Guideline Number: CG-CARD-01
-Publish Date: [Insert Date]
-Status: Reviewed / Active
+Bariatric surgery is considered medically necessary when ALL of the following criteria are met:
 
-Description
-This document addresses the medical necessity of diagnostic testing, pharmacologic therapy, and procedural interventions for the management of clinically significant heart disease. Heart disease encompasses a range of cardiovascular disorders, including coronary artery disease, heart failure, arrhythmias, and valvular heart disease. Appropriate evaluation and evidence-based treatment are critical to reduce morbidity, improve quality of life, and prevent premature mortality.
-
-Clinical Indications
-
-Medically Necessary
-The following interventions for heart disease are considered medically necessary when all of the criteria below are met:
-	1.	Age Requirement: Individual is 18 years of age or older (pediatric cases are addressed in separate guidelines).
-	2.	Clinical Presentation: Documentation of one or more of the following:
-	•	Symptoms consistent with ischemia (e.g., angina, exertional dyspnea).
-	•	Evidence of structural or functional abnormality on diagnostic imaging (echocardiogram, MRI, CT angiography).
-	•	Clinically significant arrhythmia documented on ECG, Holter, or event monitor.
-	•	Diagnosis of heart failure with NYHA Class II–IV symptoms.
-	3.	Diagnostic Work-up: Prior evaluation with non-invasive testing (e.g., exercise stress test, echocardiography, cardiac biomarkers) and invasive testing (e.g., cardiac catheterization) when indicated.
-	4.	Conservative Management: Documentation of attempted or contraindicated conservative measures, including risk factor control (blood pressure, lipids, diabetes), lifestyle modification, and pharmacologic therapy (e.g., ACE inhibitors, beta blockers, statins, antiarrhythmics).
-	5.	Advanced Interventions: For surgical or device-based therapy (e.g., CABG, valve repair/replacement, pacemaker, ICD), there must be evidence that:
-	•	The intervention addresses the underlying disease pathology; and
-	•	The expected clinical benefit outweighs potential risks.
-
-Not Medically Necessary
-Interventions are considered not medically necessary when:
-	•	The above criteria are not met;
-	•	The proposed procedure is investigational or experimental;
-	•	There is insufficient documentation of disease severity, prior therapy, or clinical benefit.
+1. Patient is 18 years or older.
+2. Patient has a BMI of 40 or greater, OR a BMI of 35 or greater with at least one comorbidity such as diabetes or hypertension.
+3. Patient has completed a structured weight loss program for 6–12 months.

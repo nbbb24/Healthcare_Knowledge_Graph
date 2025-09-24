@@ -1,0 +1,11 @@
+[
+    {
+      "name": "patient_id",
+      "type": "string",
+      "description": "Unique patient identifier",
+      "rule": null,
+      "values": null,
+      "examples": null,
+      "section": "Demographics"
+    }
+]

@@ -1,1 +1,6 @@
-python Update_data_dictionary.py --policy policy/policy2.txt --dictionary Data_dictionary.json --method nlp --dry-run
+python Update_data_dictionary.py \
+    --input policy/policy3.txt \
+    --dict Data_dictionary.json \
+    --out policies.json \
+    --dev \
+    --extractor hybrid

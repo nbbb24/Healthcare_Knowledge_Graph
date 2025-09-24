@@ -1,0 +1,83 @@
+[
+    {
+    "name": "patient_id",
+    "type": "string",
+    "description": "Unique patient identifier",
+    "rule": null,
+    "values": null,
+    "examples": null,
+    "section": "Demographics"
+    },
+    {
+    "name": "patient_age",
+    "type": "integer",
+    "description": "Patient age",
+    "rule": "patient_age >= 18",
+    "values": null,
+    "examples": null,
+    "section": "Eligibility"
+    },
+    {
+    "name": "patient_bmi",
+    "type": "float",
+    "description": "Body Mass Index",
+    "rule": "patient_bmi >= 40",
+    "values": null,
+    "examples": null,
+    "section": "Eligibility"
+    },
+    {
+    "name": "patient_bmi",
+    "type": "float",
+    "description": "Body Mass Index with comorbidity",
+    "rule": "patient_bmi >= 35 AND comorbidity_flag = 1",
+    "values": null,
+    "examples": null,
+    "section": "Eligibility"
+    },
+    {
+    "name": "comorbidity_flag",
+    "type": "boolean",
+    "description": "Whether patient has obesity-related comorbidity",
+    "rule": null,
+    "values": [0, 1],
+    "examples": null,
+    "section": "Diagnosis"
+    },
+    {
+    "name": "procedure_code",
+    "type": "CPT",
+    "description": "Laparoscopic gastric bypass",
+    "rule": null,
+    "values": null,
+    "examples": ["43644"],
+    "section": "Procedures"
+    },
+    {
+    "name": "covered_procedure",
+    "type": "string",
+    "description": "The featured covered procedure for weight loss",
+    "rule": null,
+    "values": null,
+    "examples": ["Laparoscopic gastric bypass"],
+    "section": "Procedures"
+    },
+    {
+    "name": "weight_loss_duration",
+    "type": "integer",
+    "description": "Duration of weight loss therapy in months",
+    "rule": null,
+    "values": null,
+    "examples": null,
+    "section": "Program Requirements"
+    },
+    {
+    "name": "weight_loss_goal",
+    "type": "float",
+    "description": "Goal amount of weight loss",
+    "rule": null,
+    "values": null,
+    "examples": null,
+    "section": "Program Requirements"
+    }
+    ]

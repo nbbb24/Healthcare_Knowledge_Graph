@@ -1,0 +1,19 @@
+Clinical UM Guideline – Bariatric Surgery and Other Treatments for Clinically Severe Obesity
+Guideline #: CG-SURG-83
+
+This document addresses surgical and other treatments for clinically severe obesity. Clinically severe obesity is a result of persistent and uncontrollable weight gain that constitutes a present or potential threat to life.
+Medically Necessary
+Gastric bypass and gastric restrictive procedures are considered medically necessary when all of the following criteria are met:
+Individual is age 18 years or older;
+Surgery is one of: biliopancreatic bypass with duodenal switch, laparoscopic adjustable gastric banding, Roux-en-Y (≤150 cm), sleeve gastrectomy, vertical banded gastroplasty;
+BMI criteria:
+40 or greater, OR 35 or greater with an obesity-related co-morbid condition (diabetes, cardiovascular disease, hypertension, severe OSA, Pickwickian syndrome, cardiomyopathy);
+Documentation of all: prior weight loss program, failed conservative therapy, pre-op medical/mental evaluations, pre-op education, treatment plan.
+Reoperation
+Medically necessary for complications of prior surgery (fistula, obstruction, erosion, leak, band herniation, stricture, GERD, pouch enlargement).
+Medically necessary for revision/conversion if inadequate weight loss (BMI ≥40, or ≥35 with comorbidity) ≥1 year post-op, plus required evaluations, education, and treatment plan.
+Not Medically Necessary
+Bariatric procedures when criteria above not met.
+Endoluminal reoperations (TORe, ROSE).
+Procedures for BMI <35.
+Other techniques not covered (mini gastric bypass, jejunoileal bypass, endoscopic sleeve gastroplasty, gastric plication, balloons, vagus nerve blocking devices, AspireAssist, etc.).
