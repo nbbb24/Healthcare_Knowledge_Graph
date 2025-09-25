@@ -1,0 +1,46 @@
+[
+    {
+    "name": "Gastric Bypass Medical Necessity Criteria",
+    "guideline_number": null,
+    "description": "Criteria for considering gastric bypass medically necessary including age, BMI, comorbidities, and specific procedure coding.",
+    "raw_text": "Gastric bypass and gastric restrictive procedures are considered medically necessary when all of the following criteria are met: Individual is age 18 years or older. BMI of 40 or greater, OR BMI of 35 or greater with an obesity-related comorbid condition. When services may be Medically Necessary when criteria are met: CPT 99600 Unlisted home visit service or procedure [when specified as home visit for wound care] HCPCS For the following services when specified as visit for wound care: G0299 Direct skilled nursing services of a registered nurse (RN) in the home health or hospice setting, each 15 minutes G0300 Direct skilled nursing services of a licensed practical nurse (LPN) in the home health or hospice setting, each 15 minutes S9097 Home visit for wound care ICD-10 Diagnosis All diagnose",
+    "restrictions": [
+    {
+    "condition": "Age ≥ 18",
+    "rule": "patient_age >= 18",
+    "codes": [],
+    "logic": "AND"
+    },
+    {
+    "condition": "BMI ≥ 40",
+    "rule": "patient_bmi >= 40",
+    "codes": [],
+    "logic": "OR"
+    },
+    {
+    "condition": "BMI ≥ 35 with comorbidity",
+    "rule": "patient_bmi_comorbidities >= 35 AND comorbidity_flag = 1",
+    "codes": [],
+    "logic": "OR"
+    },
+    {
+    "condition": "CPT service code for gastric bypass procedure",
+    "rule": "procedure_code IN ('99600')",
+    "codes": ["99600"],
+    "logic": "OR"
+    },
+    {
+    "condition": "HCPCS service codes for wound care visit",
+    "rule": "procedure_code IN ('G0299', 'G0300', 'S9097')",
+    "codes": ["G0299", "G0300", "S9097"],
+    "logic": "OR"
+    },
+    {
+    "condition": "ICD-10 diagnosis codes",
+    "rule": "diagnosis_code_ICD10 IN ('All diagnose')",
+    "codes": ["All diagnose"],
+    "logic": "OR"
+    }
+    ]
+    }
+    ]

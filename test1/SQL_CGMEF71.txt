@@ -1,0 +1,8 @@
+SELECT *
+FROM patients
+WHERE patient_age >= 18 
+  AND (patient_bmi >= 40 
+       OR (patient_bmi_comorbidities >= 35 AND comorbidity_flag = 1)
+       OR procedure_code IN ('99600') 
+       OR procedure_code IN ('G0299', 'G0300', 'S9097') 
+       OR diagnosis_code_ICD10 IN ('All diagnose'));

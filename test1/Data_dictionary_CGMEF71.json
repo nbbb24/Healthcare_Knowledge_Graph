@@ -1,0 +1,38 @@
+[
+    {
+    "name": "patient_id",
+    "type": "string",
+    "description": "Unique patient identifier",
+    "section": "Demographics"
+    },
+    {
+    "name": "patient_age",
+    "type": "integer",
+    "description": "Patient age must be 18 years or older",
+    "section": "Eligibility"
+    },
+    {
+    "name": "patient_bmi",
+    "type": "float",
+    "description": "Body Mass Index ≥ 40",
+    "section": "Eligibility"
+    },
+    {
+    "name": "patient_bmi_comorbidities",
+    "type": "float",
+    "description": "Body Mass Index ≥ 35 if comorbidities are present",
+    "section": "Eligibility"
+    },
+    {
+    "name": "comorbidity_flag",
+    "type": "boolean",
+    "description": "Whether the patient has obesity-related comorbidities",
+    "section": "Diagnosis"
+    },
+    {
+    "name": "procedure_code",
+    "type": "CPT",
+    "description": "Laparoscopic gastric bypass",
+    "section": "Procedures"
+    }
+    ]
