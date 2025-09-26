@@ -81,9 +81,106 @@ Creates knowledge graphs focused on policy rule structure.
 python generate_policy_rule_kg.py --sql test1/SQL_CGSURG83.txt --data-dict test1/Data_dictionary_CGSURG83.json --plot-path policy_rules.png
 ```
 
+## 📊 Data Processing Pipeline
+
+This project follows a structured workflow for processing medical policies and patient data into knowledge graphs. Here's the detailed step-by-step process:
+
+### Workflow Overview
+
+```
+Phase 1: Policy Processing
+codes.txt + medical_policy.txt
+         ↓
+    data_dictionary.json
+         ↓
+    policy.json + code_dictionary.json
+         ↓
+       sql.txt
+         ↓
+   policy_rule_kg.png
+
+Phase 2: Patient Processing
+patient_record.json + data_dictionary.json
+         ↓
+    Patient Info Extraction
+         ↓
+    patient_kg.png + patient_rule_kg.png
+```
+
+### Phase 1: Policy Data Processing
+
+#### Step 1: Input Files
+- **`codes.txt`**: Contains medical codes and their descriptions
+- **`medical_policy.txt`**: Raw medical policy text with eligibility criteria
+
+#### Step 2: Data Dictionary Extraction
+- **Output**: `data_dictionary.json`
+- **Process**: Extract and structure field definitions from the medical policy
+- **Purpose**: Creates a standardized schema for all policy variables
+- **Structure**: Organized by sections (Demographics, Eligibility, Program Requirements, etc.)
+
+#### Step 3: Policy Rule Extraction
+- **Output**: `policy.json`
+- **Process**: Parse the medical policy text into structured rule format
+- **Purpose**: Converts human-readable policy into machine-readable rules
+- **Features**: 
+  - Logical operators (AND, OR)
+  - Condition groupings
+  - Hierarchical rule organization
+
+#### Step 4: Code Dictionary Update
+- **Output**: `code_dictionary.json` (updated)
+- **Process**: Map medical codes to their descriptions and categories
+- **Purpose**: Creates a comprehensive mapping for code interpretation
+
+#### Step 5: SQL Conversion
+- **Output**: `sql.txt`
+- **Process**: Convert policy rules into SQL WHERE clauses
+- **Purpose**: Enables database querying and rule evaluation
+- **Features**: Complex logical conditions, parameterized queries
+
+#### Step 6: Policy Rule Knowledge Graph
+- **Output**: `policy_rule_kg.png`
+- **Process**: Visualize policy rules as a knowledge graph
+- **Purpose**: Understand policy structure and rule relationships
+- **Features**: 
+  - Policy at the center
+  - Rule groups by category
+  - Hierarchical organization
+
+### Phase 2: Patient Data Processing
+
+#### Step 1: Patient Data Input
+- **Input**: `patient_record.json`
+- **Content**: Complete patient profile including demographics, medical history, conditions, medications
+
+#### Step 2: Patient Information Extraction
+- **Process**: Extract patient information based on `data_dictionary.json`
+- **Purpose**: Standardize patient data according to policy schema
+- **Output**: Structured patient data ready for rule evaluation
+
+#### Step 3: Patient Knowledge Graph Generation
+- **Output**: `patient_kg.png`
+- **Process**: Create knowledge graph from patient data
+- **Purpose**: Visualize patient's medical profile and relationships
+- **Features**:
+  - Patient at the center
+  - Medical conditions, vital signs, medications as connected nodes
+  - Color-coded by data type
+
+#### Step 4: Patient Rule Evaluation
+- **Output**: `patient_rule_kg.png`
+- **Process**: Evaluate patient data against policy rules
+- **Purpose**: Determine policy compliance and eligibility
+- **Features**:
+  - Patient at the center
+  - Policy rules grouped by category
+  - Green edges for met conditions, red for unmet
+  - Visual compliance dashboard
+
 ## 📊 Example: Bariatric Surgery Policy Analysis (test1/)
 
-The `test1/` directory contains a complete example analyzing bariatric surgery eligibility criteria.
+The `test1/` directory contains a complete example analyzing bariatric surgery eligibility criteria, demonstrating the full pipeline described above.
 
 ### Input Data Files
 
@@ -135,9 +232,40 @@ Evaluates how the patient measures against policy criteria:
 
 ![Patient Rule Evaluation](test1/patient_rule_kg.png)
 
-### Running the Example
+### Complete Pipeline Example
 
-To generate all visualizations for the test1 example:
+Here's how to run the complete data processing pipeline using the test1 example:
+
+#### Phase 1: Policy Processing (if starting from raw data)
+```bash
+# Step 1: Extract data dictionary from medical policy
+# (This would typically use a script to parse medical_policy.txt)
+# Output: data_dictionary.json
+
+# Step 2: Extract policy rules and update code dictionary
+# (This would parse the policy and create structured rules)
+# Output: policy.json, code_dictionary.json
+
+# Step 3: Convert policy to SQL
+# (This would convert policy rules to SQL WHERE clauses)
+# Output: sql.txt
+
+# Step 4: Generate policy rule knowledge graph
+python generate_policy_rule_kg.py --sql test1/SQL_CGSURG83.txt --data-dict test1/Data_dictionary_CGSURG83.json --plot-path test1/policy_rule_kg.png
+```
+
+#### Phase 2: Patient Processing
+```bash
+# Step 1: Generate patient knowledge graph
+python patient_kg.py test1/Patient_Record.json --layout spring --figsize 15 10
+
+# Step 2: Evaluate patient against policy rules
+python patient_rule_kg.py test1/Patient_Record.json test1/SQL_CGSURG83.txt test1/Data_dictionary_CGSURG83.json --figsize 16 12
+```
+
+### Quick Start (Using Pre-processed Data)
+
+To generate all visualizations for the test1 example using the pre-processed data:
 
 ```bash
 # 1. Generate patient knowledge graph
