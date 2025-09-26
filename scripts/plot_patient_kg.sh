@@ -1,0 +1,1 @@
+python patient_kg.py test1/Patient_data_dictionary.json 

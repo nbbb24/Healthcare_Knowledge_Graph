@@ -8,7 +8,10 @@ beautifulsoup4
 scikit-learn
 spacy>=3.6,<4
 scispacy>=0.5.3
-# networkx>=2.8
+networkx>=2.8
+matplotlib>=3.5.0
+plotly>=5.0.0
+numpy>=1.21.0
 
 # Note: spaCy models are large and typically installed separately.
 # If you want medical NLP, install SciSpaCy model:

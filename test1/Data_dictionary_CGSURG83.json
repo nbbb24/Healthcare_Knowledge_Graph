@@ -1,0 +1,98 @@
+[
+  {
+    "name": "patient_id",
+    "type": "string",
+    "description": "Unique patient identifier",
+    "section": "Demographics"
+  },
+  {
+    "name": "patient_age",
+    "type": "integer",
+    "description": "Patient age (must be 18 years or older unless otherwise specified)",
+    "section": "Demographics"
+  },
+  {
+    "name": "patient_bmi",
+    "type": "float",
+    "description": "Body Mass Index (BMI) used to assess eligibility for bariatric surgery",
+    "section": "Eligibility"
+  },
+  {
+    "name": "comorbidity_flag",
+    "type": "boolean",
+    "description": "Whether patient has obesity-related co-morbid condition (e.g., diabetes, hypertension, cardiovascular disease, severe obstructive sleep apnea, Pickwickian syndrome, obesity related cardiomyopathy)",
+    "section": "Diagnosis"
+  },
+  {
+    "name": "weight_loss_program_participation",
+    "type": "boolean",
+    "description": "Past participation in a weight loss program",
+    "section": "Program Requirements"
+  },
+  {
+    "name": "conservative_therapy_attempt",
+    "type": "boolean",
+    "description": "Inadequate weight loss despite a committed attempt at conservative medical therapy (e.g., lifestyle interventions, diet, exercise, behavioral modifications)",
+    "section": "Program Requirements"
+  },
+  {
+    "name": "preop_medical_clearance",
+    "type": "boolean",
+    "description": "Completion of pre-operative medical evaluation and clearance",
+    "section": "Program Requirements"
+  },
+  {
+    "name": "preop_mental_health_clearance",
+    "type": "boolean",
+    "description": "Completion of pre-operative mental health evaluation and clearance",
+    "section": "Program Requirements"
+  },
+  {
+    "name": "preop_education",
+    "type": "boolean",
+    "description": "Completion of pre-operative education about risks, benefits, expectations, and need for long-term follow-up",
+    "section": "Program Requirements"
+  },
+  {
+    "name": "treatment_plan",
+    "type": "boolean",
+    "description": "Presence of a treatment plan addressing pre- and post-operative needs",
+    "section": "Program Requirements"
+  },
+  {
+    "name": "procedure_code_CPT",
+    "type": "string",
+    "description": "CPT codes for bariatric and related procedures (e.g., 43644, 43645, 43770–43775, 43842–43848, 43886–43888, 43290, 43291, 43632, 43633, 43659, 43999, 44238, 64999, 0813T)",
+    "section": "Procedures"
+  },
+  {
+    "name": "procedure_code_HCPCS",
+    "type": "string",
+    "description": "HCPCS codes for bariatric procedures (e.g., C9784, C9785)",
+    "section": "Procedures"
+  },
+  {
+    "name": "procedure_code_ICD10",
+    "type": "string",
+    "description": "ICD-10 Procedure codes for bariatric procedures and complications (e.g., 0DP60CZ, 0DV64ZZ, 0DW60CZ, 0D160ZA, 0DB60ZZ)",
+    "section": "Procedures"
+  },
+  {
+    "name": "diagnosis_code_ICD10",
+    "type": "string",
+    "description": "ICD-10 Diagnosis codes for obesity, BMI ranges, and bariatric surgery status (e.g., E66.01, E66.2, Z68.20-Z68.45, Z98.84)",
+    "section": "Diagnosis"
+  },
+  {
+    "name": "surgical_complication_flag",
+    "type": "boolean",
+    "description": "Indicates whether a surgical complication (e.g., fistula, obstruction, erosion, GERD, pouch enlargement) is present",
+    "section": "Procedures"
+  },
+  {
+    "name": "revision_conversion_flag",
+    "type": "boolean",
+    "description": "Indicates whether revision or conversion to another surgical procedure is required due to inadequate weight loss, weight regain, or complications",
+    "section": "Procedures"
+  }
+]
