@@ -164,12 +164,3 @@ python ../patient_kg.py Patient_Record.json
 python ../patient_rule_kg.py Patient_Record.json SQL_CGSURG83.txt Data_dictionary_CGSURG83.json
 python ../generate_policy_rule_kg.py --sql SQL_CGSURG83.txt --data-dict Data_dictionary_CGSURG83.json
 ```
-
-## 🎨 Color Coding
-
-- **Patient Nodes**: Red
-- **Policy Nodes**: Teal  
-- **Met Conditions**: Green
-- **Unmet Conditions**: Red
-- **Rule Groups**: Blue
-- **Data Fields**: Mint
