@@ -1,3 +1,12 @@
 /DEMO/
 /test/
 /policy/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+.DS_Store?
