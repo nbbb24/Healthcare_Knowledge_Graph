@@ -324,16 +324,16 @@ class PatientRuleKGVisualizer:
     
     def build_knowledge_graph(self) -> None:
         """Build the knowledge graph with patient at center and conditions as nodes."""
-        # Create patient center node
-        patient_id = "patient_center"
-        patient_name = self.patient_data.get('patient', {}).get('name', 'Unknown Patient')
+        # Create patient center node using actual patient_id
+        patient_id = self.patient_data.get('patient_id', 'unknown_patient')
+        patient_name = f"Patient {patient_id}"
         
         self.graph.add_node(
             patient_id,
             id=patient_id,
             type="Patient",
             label=patient_name,
-            description="Patient record",
+            description=f"Patient record for {patient_id}",
             node_size=2000
         )
         
@@ -420,7 +420,7 @@ class PatientRuleKGVisualizer:
                 )
     
     def create_matplotlib_visualization(self, layout: str = 'spring', figsize: Tuple[int, int] = (16, 12), 
-                                     output_file: Optional[str] = None, input_file_path: Optional[str] = None) -> None:
+                                     output_file: Optional[str] = None, input_file_path: Optional[str] = None, no_show: bool = False) -> None:
         """Create a matplotlib-based visualization of the patient rule knowledge graph."""
         plt.figure(figsize=figsize)
         
@@ -535,17 +535,23 @@ class PatientRuleKGVisualizer:
         else:
             output_filename = f"patient_rule_kg_{layout}_{figsize[0]}x{figsize[1]}.png"
         
-        # Determine output directory (same as input file if provided)
-        if input_file_path:
+        # Determine output path
+        if output_file:
+            # If output_file is provided, use it as the full path
+            output_path = output_filename
+        elif input_file_path:
+            # If no output_file but input_file_path is provided, use input file directory
             output_dir = os.path.dirname(os.path.abspath(input_file_path))
             output_path = os.path.join(output_dir, output_filename)
         else:
+            # Default to current directory
             output_path = output_filename
             
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
         print(f"📊 Patient rule knowledge graph saved as: {output_path}")
         
-        plt.show()
+        if not no_show:
+            plt.show()
     
     def print_evaluation_summary(self) -> None:
         """Print a summary of the rule evaluation."""
@@ -635,6 +641,8 @@ Examples:
                        help='Figure size for matplotlib (width height)')
     parser.add_argument('--output-file', type=str, 
                        help='Custom output filename (without extension)')
+    parser.add_argument('--no-show', action='store_true',
+                       help='Do not display the plot (only save to file)')
     
     args = parser.parse_args()
     
@@ -672,7 +680,8 @@ Examples:
         layout=args.layout, 
         figsize=tuple(args.figsize),
         output_file=args.output_file,
-        input_file_path=args.patient_file
+        input_file_path=args.patient_file,
+        no_show=args.no_show
     )
     
     print("✅ Patient rule knowledge graph complete!")

@@ -1,0 +1,18 @@
+{
+    "patient_id": "200006",
+    "patient_age": 60,
+    "patient_bmi": 32.0,
+    "comorbidity_flag": false,
+    "weight_loss_program_participation": false,
+    "conservative_therapy_attempt": false,
+    "preop_medical_clearance": false,
+    "preop_mental_health_clearance": false,
+    "preop_education": false,
+    "treatment_plan": false,
+    "procedure_code_CPT": null,
+    "procedure_code_HCPCS": null,
+    "procedure_code_ICD10": null,
+    "diagnosis_code_ICD10": "Z68.35",
+    "surgical_complication_flag": false,
+    "revision_conversion_flag": false
+  }

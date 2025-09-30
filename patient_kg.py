@@ -255,7 +255,7 @@ class PatientKGVisualizer:
             print("Creating basic graph from JSON structure...")
             self.create_simple_dict_graph()
     
-    def create_matplotlib_visualization(self, layout: str = 'spring', figsize: Tuple[int, int] = (15, 10), output_file: Optional[str] = None, input_file_path: Optional[str] = None) -> None:
+    def create_matplotlib_visualization(self, layout: str = 'spring', figsize: Tuple[int, int] = (15, 10), output_file: Optional[str] = None, input_file_path: Optional[str] = None, no_show: bool = False) -> None:
         """Create a matplotlib-based visualization of the knowledge graph."""
         plt.figure(figsize=figsize)
         
@@ -333,17 +333,23 @@ class PatientKGVisualizer:
         else:
             output_filename = f"patient_kg_{layout}_{figsize[0]}x{figsize[1]}.png"
         
-        # Determine output directory (same as input file if provided)
-        if input_file_path:
+        # Determine output path
+        if output_file:
+            # If output_file is provided, use it as the full path
+            output_path = output_filename
+        elif input_file_path:
+            # If no output_file but input_file_path is provided, use input file directory
             output_dir = os.path.dirname(os.path.abspath(input_file_path))
             output_path = os.path.join(output_dir, output_filename)
         else:
+            # Default to current directory
             output_path = output_filename
             
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
         print(f"📊 Knowledge graph saved as: {output_path}")
         
-        plt.show()
+        if not no_show:
+            plt.show()
     
     def create_plotly_visualization(self, layout: str = 'spring', output_file: Optional[str] = None, input_file_path: Optional[str] = None) -> None:
         """Create an interactive Plotly visualization of the knowledge graph."""
@@ -538,6 +544,8 @@ Examples:
                        default='static', help='Output type')
     parser.add_argument('--output-file', type=str, 
                        help='Custom output filename (without extension)')
+    parser.add_argument('--no-show', action='store_true',
+                       help='Do not display the plot (only save to file)')
     
     args = parser.parse_args()
     
@@ -566,7 +574,8 @@ Examples:
             layout=args.layout, 
             figsize=tuple(args.figsize),
             output_file=args.output_file,
-            input_file_path=args.input_file
+            input_file_path=args.input_file,
+            no_show=args.no_show
         )
     
     print("✅ Visualization complete!")
