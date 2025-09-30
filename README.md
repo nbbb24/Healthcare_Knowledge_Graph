@@ -25,6 +25,12 @@ A Python toolkit for generating and visualizing knowledge graphs from medical po
 ### 1. `patient_kg.py`
 Creates knowledge graphs from patient data in various JSON formats.
 
+**Input:**
+- Patient data dictionary JSON file (e.g., `Patient_data_dictionary_200001.json`)
+
+**Output:**
+- Patient knowledge graph PNG visualization (e.g., `patient_kg_200001.png`)
+
 **Features:**
 - Auto-detects data structure (patient records, policies, data dictionaries)
 - Multiple visualization layouts (spring, circular, hierarchical)
@@ -33,25 +39,43 @@ Creates knowledge graphs from patient data in various JSON formats.
 
 **Usage:**
 ```bash
-python patient_kg.py test1/Patient_Record1.json --layout spring --figsize 15 10
+python patient_kg.py test1/Patient_data_dictionary/Patient_data_dictionary_200001.json --output-file test1/Patient_KG/patient_kg_200001 --no-show
 ```
 
 ### 2. `patient_rule_kg.py`
 Evaluates patient data against policy rules and visualizes compliance.
 
+**Input:**
+- Patient data dictionary JSON file (e.g., `Patient_data_dictionary_200001.json`)
+- SQL policy file (e.g., `SQL_CGSURG83.txt`)
+- Policy JSON file (e.g., `Policy_CGSURG83.json`)
+
+**Output:**
+- Patient rule knowledge graph PNG visualization (e.g., `patient_rule_kg_200001.png`)
+- Compliance report JSON (e.g., `pat_200001_pol_CGSURG83.json`)
+
 **Features:**
 - Parses SQL conditions into evaluable rules
 - Compares patient data against policy criteria
-- Color-codes met/unmet conditions
+- Color-codes met/unmet conditions (green=met, red=not met, blue=logically met by OR)
 - Detailed evaluation summary
 
 **Usage:**
 ```bash
-python patient_rule_kg.py test1/Patient_Record1.json test1/Policy_CGSURG83/SQL_CGSURG83.txt test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --figsize 16 12
+python patient_rule_kg.py test1/Patient_data_dictionary/Patient_data_dictionary_200001.json test1/Policy_CGSURG83/SQL_CGSURG83.txt test1/Policy_CGSURG83/Policy_CGSURG83.json --policy-id CGSURG83 --output-file test1/Patient_Rule_KG/patient_rule_kg_200001 --compliance-dir test1/Patient_Rule_KG --no-show
 ```
 
 ### 3. `generate_policy_rule_kg.py`
 Creates knowledge graphs focused on policy rule structure.
+
+**Input:**
+- SQL policy file (e.g., `SQL_CGSURG83.txt`)
+- Data dictionary JSON file (e.g., `Data_dictionary_CGSURG83.json`)
+
+**Output:**
+- Policy rule knowledge graph PNG visualization (e.g., `policy_rule_kg.png`)
+- Policy rule nodes JSON (e.g., `policy_rule_kg_nodes.json`)
+- Policy rule edges JSON (e.g., `policy_rule_kg_edges.json`)
 
 **Features:**
 - Groups conditions by category (demographics, eligibility, requirements)
@@ -61,7 +85,7 @@ Creates knowledge graphs focused on policy rule structure.
 
 **Usage:**
 ```bash
-python generate_policy_rule_kg.py --sql test1/Policy_CGSURG83/SQL_CGSURG83.txt --data-dict test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --plot-path policy_rules.png
+python generate_policy_rule_kg.py --sql test1/Policy_CGSURG83/SQL_CGSURG83.txt --data-dict test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --output-dir test1/Policy_CGSURG83 --plot-path test1/Policy_CGSURG83/policy_rule_kg.png
 ```
 
 ### 4. `DataField.py`
@@ -77,6 +101,11 @@ The `scripts/` directory contains shell scripts for batch processing multiple pa
 ### `generate_all_patient_kgs.sh`
 Generates patient knowledge graphs for all patients in the test1 dataset.
 
+**What it does:**
+- Loops through all `Patient_data_dictionary_*.json` files in `test1/Patient_data_dictionary/`
+- Extracts patient_id from each file
+- Generates `patient_kg_<patient_ID>.png` for each patient in `test1/Patient_KG/`
+
 **Usage:**
 ```bash
 chmod +x scripts/generate_all_patient_kgs.sh
@@ -84,7 +113,12 @@ chmod +x scripts/generate_all_patient_kgs.sh
 ```
 
 ### `generate_all_patient_rule_kgs.sh`
-Generates patient rule knowledge graphs for all patients against policy rules.
+Generates patient rule knowledge graphs for all patients against policy <policy_ID>
+
+**What it does:**
+- Loops through all `Patient_data_dictionary_*.json` files
+- Evaluates each patient against <policy_ID> policy
+- Generates `patient_rule_kg_<patient_ID>.png` and `pat_<patient_ID>_pol_<policy_ID>.json` for each patient in `test1/Patient_Rule_KG/`
 
 **Usage:**
 ```bash
@@ -92,8 +126,17 @@ chmod +x scripts/generate_all_patient_rule_kgs.sh
 ./scripts/generate_all_patient_rule_kgs.sh
 ```
 
-### `plot_patient_kg.sh`, `plot_patient_rule_kg.sh`, `plot_policy_rule_kg.sh`
-Individual plotting scripts for specific visualizations.
+### `plot_policy_rule_kg.sh`
+Generates the policy rule knowledge graph for policy <policy_ID>.
+
+**What it does:**
+- Generates `policy_rule_kg.png`, `policy_rule_kg_nodes.json`, and `policy_rule_kg_edges.json` in `test1/Policy_<policy_ID>/`
+
+**Usage:**
+```bash
+chmod +x scripts/plot_policy_rule_kg.sh
+./scripts/plot_policy_rule_kg.sh
+```
 
 ## 📊 Data Processing Pipeline
 
@@ -102,95 +145,99 @@ This project follows a structured workflow for processing medical policies and p
 ### Workflow Overview
 
 ```
-Phase 1: Policy Processing
-codes.txt + medical_policy.txt
+Phase 1: Policy Processing (generate_policy_rule_kg.py)
+Input: SQL_<policy_ID>.txt + Data_dictionary_<policy_ID>.json
          ↓
-    data_dictionary.json
-         ↓
-    policy.json + code_dictionary.json
-         ↓
-       sql.txt
-         ↓
-   policy_rule_kg.png
+Output: policy_rule_kg.png + policy_rule_kg_nodes.json + policy_rule_kg_edges.json
 
-Phase 2: Patient Processing
-patient_record.json + data_dictionary.json
+Phase 2: Patient Knowledge Graph (patient_kg.py)
+Input: Patient_data_dictionary_<ID>.json
          ↓
-    Patient Info Extraction
+Output: patient_kg_<ID>.png
+
+Phase 3: Patient Rule Evaluation (patient_rule_kg.py)
+Input: Patient_data_dictionary_<ID>.json + SQL_<policy_ID>.txt + Policy_<policy_ID>.json
          ↓
-    patient_kg.png + patient_rule_kg.png
+Output: patient_rule_kg_<ID>.png + pat_<ID>_pol_<policy_ID>.json
 ```
 
-### Phase 1: Policy Data Processing
+### Phase 1: Policy Rule Knowledge Graph Generation
 
-#### Step 1: Input Files
-- **`codes.txt`**: Contains medical codes and their descriptions
-- **`medical_policy.txt`**: Raw medical policy text with eligibility criteria
+**Script**: `generate_policy_rule_kg.py`
 
-#### Step 2: Data Dictionary Extraction
-- **Output**: `data_dictionary.json`
-- **Process**: Extract and structure field definitions from the medical policy
-- **Purpose**: Creates a standardized schema for all policy variables
-- **Structure**: Organized by sections (Demographics, Eligibility, Program Requirements, etc.)
+**Input Files:**
+- `SQL_<policy_ID>.txt`: SQL WHERE clause with policy eligibility criteria
+- `Data_dictionary_<policy_ID>.json`: Field definitions for all policy variables
 
-#### Step 3: Policy Rule Extraction
-- **Output**: `policy.json`
-- **Process**: Parse the medical policy text into structured rule format
-- **Purpose**: Converts human-readable policy into machine-readable rules
-- **Features**: 
-  - Logical operators (AND, OR)
-  - Condition groupings
-  - Hierarchical rule organization
+**Output Files:**
+- `policy_rule_kg.png`: Visual knowledge graph of policy rules
+- `policy_rule_kg_nodes.json`: Node data for the knowledge graph
+- `policy_rule_kg_edges.json`: Edge data for the knowledge graph
 
-#### Step 4: Code Dictionary Update
-- **Output**: `code_dictionary.json` (updated)
-- **Process**: Map medical codes to their descriptions and categories
-- **Purpose**: Creates a comprehensive mapping for code interpretation
+**Process:**
+1. Parse SQL WHERE clause to extract individual conditions
+2. Match conditions with data dictionary to get field descriptions
+3. Group conditions by type (demographics, eligibility, requirements, procedures, diagnosis)
+4. Build hierarchical knowledge graph with policy at center
+5. Generate visualization and export JSON data
 
-#### Step 5: SQL Conversion
-- **Output**: `sql.txt`
-- **Process**: Convert policy rules into SQL WHERE clauses
-- **Purpose**: Enables database querying and rule evaluation
-- **Features**: Complex logical conditions, parameterized queries
+**Visualization Features:**
+- Policy node at the center (red)
+- Condition group nodes (teal)
+- Individual condition nodes (blue)
+- Hierarchical organization showing rule relationships
 
-#### Step 6: Policy Rule Knowledge Graph
-- **Output**: `policy_rule_kg.png`
-- **Process**: Visualize policy rules as a knowledge graph
-- **Purpose**: Understand policy structure and rule relationships
-- **Features**: 
-  - Policy at the center
-  - Rule groups by category
-  - Hierarchical organization
+### Phase 2: Patient Knowledge Graph Generation
 
-### Phase 2: Patient Data Processing
+**Script**: `patient_kg.py`
 
-#### Step 1: Patient Data Input
-- **Input**: `patient_record.json`
-- **Content**: Complete patient profile including demographics, medical history, conditions, medications
+**Input Files:**
+- `Patient_data_dictionary_<ID>.json`: Patient data dictionary with demographics, conditions, medications, etc.
 
-#### Step 2: Patient Information Extraction
-- **Process**: Extract patient information based on `data_dictionary.json`
-- **Purpose**: Standardize patient data according to policy schema
-- **Output**: Structured patient data ready for rule evaluation
+**Output Files:**
+- `patient_kg_<ID>.png`: Visual knowledge graph of patient data
 
-#### Step 3: Patient Knowledge Graph Generation
-- **Output**: `patient_kg.png`
-- **Process**: Create knowledge graph from patient data
-- **Purpose**: Visualize patient's medical profile and relationships
-- **Features**:
-  - Patient at the center
-  - Medical conditions, vital signs, medications as connected nodes
-  - Color-coded by data type
+**Process:**
+1. Load patient data dictionary JSON
+2. Auto-detect data structure
+3. Build knowledge graph with patient at center
+4. Generate visualization with color-coded nodes
 
-#### Step 4: Patient Rule Evaluation
-- **Output**: `patient_rule_kg.png`
-- **Process**: Evaluate patient data against policy rules
-- **Purpose**: Determine policy compliance and eligibility
-- **Features**:
-  - Patient at the center
-  - Policy rules grouped by category
-  - Green edges for met conditions, red for unmet
-  - Visual compliance dashboard
+**Visualization Features:**
+- Patient node at the center (red)
+- Attribute nodes connected to patient
+- Color-coded by data type (demographics, medical conditions, etc.)
+- Spring layout for optimal spacing
+
+### Phase 3: Patient Rule Evaluation
+
+**Script**: `patient_rule_kg.py`
+
+**Input Files:**
+- `Patient_data_dictionary_<ID>.json`: Patient data dictionary
+- `SQL_<policy_ID>.txt`: SQL policy conditions
+- `Policy_<policy_ID>.json`: Policy rules with descriptions
+
+**Output Files:**
+- `patient_rule_kg_<ID>.png`: Visual knowledge graph showing policy compliance
+- `pat_<ID>_pol_<policy_ID>.json`: Compliance report with condition evaluation results
+
+**Process:**
+1. Load patient data and policy rules
+2. Parse and evaluate each SQL condition against patient data
+3. Apply logical operators (AND/OR) to determine overall compliance
+4. Build knowledge graph showing evaluation results
+5. Generate visualization and compliance report
+
+**Visualization Features:**
+- Patient node at the center (red)
+- Condition group nodes (teal) organized by AND/OR logic
+- Condition nodes color-coded by status:
+  - Green: Condition met
+  - Blue: Logically met by other OR condition
+  - Red: Condition not met
+- Edge colors indicate compliance status
+- Overall policy compliance status displayed at top
 
 ## 📊 Example: Bariatric Surgery Policy Analysis (test1/)
 
@@ -200,20 +247,20 @@ The `test1/` directory contains a complete example analyzing bariatric surgery e
 
 1. **Patient Records** (`Patient_data_dictionary/`):
    - Multiple patient profiles with complete medical data
-   - Patient 200001: 44-year-old male (Robert Chen) with BMI 40.8, diabetes and hypertension
+   - Patient <patient_ID>: 44-year-old male (Robert Chen) with BMI 40.8, diabetes and hypertension
    - Additional patients (200002-200006, 445789123) with varied medical profiles
    - Medical history, medications, and assessment plans
 
-2. **SQL Policy** (`Policy_CGSURG83/SQL_CGSURG83.txt`):
+2. **SQL Policy** (`Policy_<policy_ID>/SQL_<policy_ID>.txt`):
    - Complex eligibility criteria for bariatric surgery
    - BMI requirements (≥40 or ≥35 with comorbidities)
    - Program requirements and procedural codes
 
-3. **Data Dictionary** (`Policy_CGSURG83/Data_dictionary_CGSURG83.json`):
+3. **Data Dictionary** (`Policy_<policy_ID>/Data_dictionary_<policy_ID>.json`):
    - Field definitions for all policy variables
    - Organized by sections: Demographics, Eligibility, Program Requirements, etc.
 
-4. **Policy Rules** (`Policy_CGSURG83/Policy_CGSURG83.json`):
+4. **Policy Rules** (`Policy_<policy_ID>/Policy_<policy_ID>.json`):
    - Structured representation of policy restrictions
    - Machine-readable format for rule evaluation
 
@@ -228,7 +275,7 @@ Shows individual patient data structures with:
 - Color-coded by data type (demographics, medical conditions, etc.)
 - Generated for each patient (200001-200006, 445789123)
 
-#### 2. Policy Rule Graph (`Policy_CGSURG83/policy_rule_kg.png`)
+#### 2. Policy Rule Graph (`Policy_<policy_ID>/policy_rule_kg.png`)
 Displays the policy rule structure:
 - Policy at the center
 - Rule groups organized by category
@@ -246,50 +293,43 @@ Evaluates how each patient measures against policy criteria:
 
 Here's how to run the complete data processing pipeline using the test1 example:
 
-#### Phase 1: Policy Processing (if starting from raw data)
+#### Phase 1: Generate Policy Rule Knowledge Graph
 ```bash
-# Step 1: Extract data dictionary from medical policy
-# (This would typically use a script to parse medical_policy.txt)
-# Output: data_dictionary.json
-
-# Step 2: Extract policy rules and update code dictionary
-# (This would parse the policy and create structured rules)
-# Output: policy.json, code_dictionary.json
-
-# Step 3: Convert policy to SQL
-# (This would convert policy rules to SQL WHERE clauses)
-# Output: sql.txt
-
-# Step 4: Generate policy rule knowledge graph
-python generate_policy_rule_kg.py --sql test1/Policy_CGSURG83/SQL_CGSURG83.txt --data-dict test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --plot-path test1/Policy_CGSURG83/policy_rule_kg.png
+python generate_policy_rule_kg.py \
+  --sql test1/Policy_<policy_ID>/SQL_<policy_ID>.txt \
+  --data-dict test1/Policy_<policy_ID>/Data_dictionary_<policy_ID>.json \
+  --output-dir test1/Policy_<policy_ID> \
+  --plot-path test1/Policy_<policy_ID>/policy_rule_kg.png
 ```
 
-#### Phase 2: Patient Processing
+#### Phase 2: Generate Patient Knowledge Graphs
 ```bash
-# Step 1: Generate patient knowledge graph
-python patient_kg.py test1/Patient_Record1.json --layout spring --figsize 15 10
+# For a single patient
+python patient_kg.py \
+  test1/Patient_data_dictionary/Patient_data_dictionary_200001.json \
+  --output-file test1/Patient_KG/patient_kg_200001 \
+  --no-show
 
-# Step 2: Evaluate patient against policy rules
-python patient_rule_kg.py test1/Patient_Record1.json test1/Policy_CGSURG83/SQL_CGSURG83.txt test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --figsize 16 12
-```
-
-### Quick Start (Using Pre-processed Data)
-
-To generate all visualizations for the test1 example using the pre-processed data:
-
-```bash
-# Option 1: Generate for individual patient
-python patient_kg.py test1/Patient_Record1.json --layout spring --figsize 15 10
-python patient_rule_kg.py test1/Patient_Record1.json test1/Policy_CGSURG83/SQL_CGSURG83.txt test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --figsize 16 12
-
-# Option 2: Generate for all patients using automation scripts
+# For all patients using the automation script
 chmod +x scripts/generate_all_patient_kgs.sh
-chmod +x scripts/generate_all_patient_rule_kgs.sh
 ./scripts/generate_all_patient_kgs.sh
-./scripts/generate_all_patient_rule_kgs.sh
+```
 
-# 3. Generate policy rule graph
-python generate_policy_rule_kg.py --sql test1/Policy_CGSURG83/SQL_CGSURG83.txt --data-dict test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --plot-path test1/Policy_CGSURG83/policy_rule_kg.png
+#### Phase 3: Evaluate Patients Against Policy
+```bash
+# For a single patient
+python patient_rule_kg.py \
+  test1/Patient_data_dictionary/Patient_data_dictionary_200001.json \
+  test1/Policy_<policy_ID>/SQL_<policy_ID>.txt \
+  test1/Policy_<policy_ID>/Policy_<policy_ID>.json \
+  --policy-id <policy_ID> \
+  --output-file test1/Patient_Rule_KG/patient_rule_kg_200001 \
+  --compliance-dir test1/Patient_Rule_KG \
+  --no-show
+
+# For all patients using the automation script
+chmod +x scripts/generate_all_patient_rule_kgs.sh
+./scripts/generate_all_patient_rule_kgs.sh
 ```
 
 ## 🚀 Quick Start
@@ -299,15 +339,40 @@ python generate_policy_rule_kg.py --sql test1/Policy_CGSURG83/SQL_CGSURG83.txt -
 pip install -r requirements.txt
 ```
 
-2. Run the test1 example:
+2. Generate all visualizations:
 ```bash
-# Generate for individual patient
-python patient_kg.py test1/Patient_Record1.json
-python patient_rule_kg.py test1/Patient_Record1.json test1/Policy_CGSURG83/SQL_CGSURG83.txt test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json
-python generate_policy_rule_kg.py --sql test1/Policy_CGSURG83/SQL_CGSURG83.txt --data-dict test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json
+# Generate policy rule knowledge graph
+chmod +x scripts/plot_policy_rule_kg.sh
+./scripts/plot_policy_rule_kg.sh
 
-# Or generate for all patients at once
-chmod +x scripts/generate_all_patient_kgs.sh scripts/generate_all_patient_rule_kgs.sh
+# Generate patient knowledge graphs for all patients
+chmod +x scripts/generate_all_patient_kgs.sh
 ./scripts/generate_all_patient_kgs.sh
+
+# Generate patient rule evaluations for all patients
+chmod +x scripts/generate_all_patient_rule_kgs.sh
 ./scripts/generate_all_patient_rule_kgs.sh
+```
+
+3. Or run for a single patient:
+```bash
+# Generate policy rule KG
+python generate_policy_rule_kg.py \
+  --sql test1/Policy_<policy_ID>/SQL_<policy_ID>.txt \
+  --data-dict test1/Policy_<policy_ID>/Data_dictionary_<policy_ID>.json \
+  --output-dir test1/Policy_<policy_ID>
+
+# Generate patient KG
+python patient_kg.py \
+  test1/Patient_data_dictionary/Patient_data_dictionary_<patient_ID>.json \
+  --output-file test1/Patient_KG/patient_kg_<patient_ID>
+
+# Evaluate patient against policy
+python patient_rule_kg.py \
+  test1/Patient_data_dictionary/Patient_data_dictionary_<patient_ID>.json \
+  test1/Policy_<policy_ID>/SQL_<policy_ID>.txt \
+  test1/Policy_<policy_ID>/Policy_<policy_ID>.json \
+  --policy-id <policy_ID> \
+  --output-file test1/Patient_Rule_KG/patient_rule_kg_<patient_ID> \
+  --compliance-dir test1/Patient_Rule_KG
 ```

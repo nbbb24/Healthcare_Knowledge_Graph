@@ -12,7 +12,7 @@ for patient_file in test1/Patient_data_dictionary/Patient_data_dictionary*.json;
         echo "🔄 Processing Patient ID: $patient_id for rule KG..."
         
         # Generate the patient rule knowledge graph and save to Patient_Rule_KG directory
-        python patient_rule_kg.py "$patient_file" test1/Policy_CGSURG83/SQL_CGSURG83.txt test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --output-file "test1/Patient_Rule_KG/patient_rule_kg_$patient_id" --no-show
+        python patient_rule_kg.py "$patient_file" test1/Policy_CGSURG83/SQL_CGSURG83.txt test1/Policy_CGSURG83/Policy_CGSURG83.json --policy-id CGSURG83 --output-file "test1/Patient_Rule_KG/patient_rule_kg_$patient_id" --compliance-dir test1/Patient_Rule_KG --no-show
         
         if [ $? -eq 0 ]; then
             echo "✅ Successfully generated patient_rule_kg_$patient_id"

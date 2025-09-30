@@ -1,43 +1,26 @@
 SELECT *
 FROM patients
 WHERE patient_age >= 18
-  AND procedure IN ('biliopancreatic_bypass_with_duodenal_switch',
-                    'laparoscopic_adjustable_gastric_banding',
-                    'roux_en_y_<=150cm',
-                    'sleeve_gastrectomy',
-                    'vertical_banded_gastroplasty')
   AND (
-        patient_bmi >= 40
-        OR (patient_bmi >= 35 AND comorbidity IN ('diabetes','cardiovascular_disease','hypertension','severe_sleep_apnea','pickwickian_syndrome','obesity_cardiomyopathy'))
-      )
-  AND participated_weight_loss_program = TRUE
-  AND conservative_therapy_failed = TRUE
-  AND medical_clearance = TRUE
-  AND mental_health_clearance = TRUE
+    (procedure_code_CPT IN ('43644','43645','43770','43771','43772','43773','43774','43775','43842','43843','43845','43846','43847','43848','43886','43887','43888'))
+    OR (procedure_code_ICD10 IN ('0DP60CZ','0DP64CZ','0DV60CZ','0DV64CZ','0DV60ZZ','0DV64ZZ','0DW60CZ','0DW64CZ','0D160ZA','0D160ZB','0D164ZA','0D164ZB','0D164Z9','0D190ZB','0DB60Z3','0DB64Z3','0DB68Z3','0DB60ZZ','0DB64ZZ'))
+  )
+  AND (
+    patient_bmi >= 40
+    OR (patient_bmi >= 35 AND comorbidity_flag = TRUE)
+  )
+  AND weight_loss_program_participation = TRUE
+  AND conservative_therapy_attempt = TRUE
+  AND preop_medical_clearance = TRUE
+  AND preop_mental_health_clearance = TRUE
   AND preop_education = TRUE
-  AND treatment_plan_documented = TRUE
-  OR surgical_complication IN ('fistula','obstruction','erosion','leakage','band_herniation','stricture','GERD','pouch_dilation')
-  OR (years_since_prior_procedure >= 1
-        AND (patient_bmi >= 40
-             OR (patient_bmi >= 35 AND comorbidity IN ('diabetes','cardiovascular_disease','hypertension','severe_sleep_apnea','pickwickian_syndrome','obesity_cardiomyopathy')))
-        AND medical_clearance = TRUE
-        AND mental_health_clearance = TRUE
-        AND preop_education = TRUE
-        AND treatment_plan_documented = TRUE)
-  OR initial_procedure_complication IN ('obstruction','stricture','GERD')
-  OR procedure IN ('TORe','ROSE','mini_gastric_bypass','jejunoileal_bypass',
-                   'biliopancreatic_without_duodenal_switch','single_anastomosis_duodenal_switch',
-                   'long_limb_roux_en_y_gt150cm','endogastric_stomaphyx','endoscopic_sleeve_gastroplasty',
-                   'laparoscopic_gastric_plication','orbera_balloon','transpyloric_shuttle',
-                   'vagus_nerve_block','aspireassist')
-  OR procedure_code_CPT IN ('43644','43645','43770','43771','43772','43773','43774','43775',
-                            '43842','43843','43845','43846','43847','43848','43886','43887','43888')
-  OR procedure_code_ICD10 IN ('0DP60CZ','0DP64CZ','0DV60CZ','0DV64CZ','0DV60ZZ','0DV64ZZ',
-                              '0DW60CZ','0DW64CZ','0D160ZA','0D160ZB','0D164ZA','0D164ZB',
-                              '0D164Z9','0D190ZB','0DB60Z3','0DB64Z3','0DB68Z3','0DB60ZZ','0DB64ZZ')
-  OR diagnosis_code_ICD10 IN ('E66.01','E66.09','E66.1','E66.2','E66.3','E66.811','E66.812','E66.813',
-                              'E66.89','E66.9','E88.82','Z46.51','Z68.35','Z68.36','Z68.37','Z68.38',
-                              'Z68.39','Z68.41','Z68.42','Z68.43','Z68.44','Z68.45',
-                              'Z68.51','Z68.52','Z68.53','Z68.54','Z68.55','Z68.56','Z98.84')
-  OR diagnosis_code_ICD10 IN ('Z68.20','Z68.21','Z68.22','Z68.23','Z68.24','Z68.25','Z68.26','Z68.27',
-                              'Z68.28','Z68.29','Z68.30','Z68.31','Z68.32','Z68.33','Z68.34');
+  AND treatment_plan = TRUE
+  OR surgical_complication_flag = TRUE
+  OR revision_conversion_flag = TRUE
+  OR patient_bmi >= 40
+  OR (patient_bmi >= 35 AND comorbidity_flag = TRUE)
+  OR patient_bmi < 35
+  OR procedure_code_CPT IN ('43644','43645','43770','43771','43772','43773','43774','43775','43842','43843','43845','43846','43847','43848','43886','43887','43888')
+  OR procedure_code_ICD10 IN ('0DP60CZ','0DP64CZ','0DV60CZ','0DV64CZ','0DV60ZZ','0DV64ZZ','0DW60CZ','0DW64CZ','0D160ZA','0D160ZB','0D164ZA','0D164ZB','0D164Z9','0D190ZB','0DB60Z3','0DB64Z3','0DB68Z3','0DB60ZZ','0DB64ZZ')
+  OR diagnosis_code_ICD10 IN ('E66.01','E66.09','E66.1','E66.2','E66.3','E66.811','E66.812','E66.813','E66.89','E66.9','E88.82','Z46.51','Z98.84','Z68.35','Z68.36','Z68.37','Z68.38','Z68.39','Z68.41','Z68.42','Z68.43','Z68.44','Z68.45','Z68.51','Z68.52','Z68.53','Z68.54','Z68.55','Z68.56')
+  OR diagnosis_code_ICD10 IN ('Z68.20','Z68.21','Z68.22','Z68.23','Z68.24','Z68.25','Z68.26','Z68.27','Z68.28','Z68.29','Z68.30','Z68.31','Z68.32','Z68.33','Z68.34');

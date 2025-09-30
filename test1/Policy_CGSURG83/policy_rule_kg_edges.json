@@ -7,7 +7,7 @@
   },
   {
     "source": "policy_center",
-    "target": "group_other",
+    "target": "group_procedure",
     "relation": "contains",
     "edge_type": "policy_rule"
   },
@@ -25,12 +25,6 @@
   },
   {
     "source": "policy_center",
-    "target": "group_procedure",
-    "relation": "contains",
-    "edge_type": "policy_rule"
-  },
-  {
-    "source": "policy_center",
     "target": "group_diagnosis",
     "relation": "contains",
     "edge_type": "policy_rule"
@@ -42,74 +36,20 @@
     "edge_type": "group_condition"
   },
   {
-    "source": "group_other",
-    "target": "condition_roux_en_y__0",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_other",
-    "target": "condition_participated_weight_loss_program_1",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_other",
-    "target": "condition_conservative_therapy_failed_2",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_other",
-    "target": "condition_medical_clearance_3",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_other",
-    "target": "condition_mental_health_clearance_4",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_other",
-    "target": "condition_treatment_plan_documented_5",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_other",
-    "target": "condition_surgical_complication_6",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_eligibility",
-    "target": "condition_patient_bmi_0",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_requirement",
-    "target": "condition_preop_education_0",
+    "source": "group_procedure",
+    "target": "condition_procedure_code_cpt_0",
     "relation": "contains",
     "edge_type": "group_condition"
   },
   {
     "source": "group_procedure",
-    "target": "condition_years_since_prior_procedure_0",
+    "target": "condition_surgical_complication_flag_1",
     "relation": "contains",
     "edge_type": "group_condition"
   },
   {
     "source": "group_procedure",
-    "target": "condition_initial_procedure_complication_1",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_procedure",
-    "target": "condition_procedure_2",
+    "target": "condition_revision_conversion_flag_2",
     "relation": "contains",
     "edge_type": "group_condition"
   },
@@ -122,6 +62,66 @@
   {
     "source": "group_procedure",
     "target": "condition_procedure_code_icd10_4",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_eligibility",
+    "target": "condition_patient_bmi_0",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_eligibility",
+    "target": "condition_patient_bmi_1",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_eligibility",
+    "target": "condition_patient_bmi_2",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_eligibility",
+    "target": "condition_patient_bmi_3",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_requirement",
+    "target": "condition_weight_loss_program_participation_0",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_requirement",
+    "target": "condition_conservative_therapy_attempt_1",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_requirement",
+    "target": "condition_preop_medical_clearance_2",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_requirement",
+    "target": "condition_preop_mental_health_clearance_3",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_requirement",
+    "target": "condition_preop_education_4",
+    "relation": "contains",
+    "edge_type": "group_condition"
+  },
+  {
+    "source": "group_requirement",
+    "target": "condition_treatment_plan_5",
     "relation": "contains",
     "edge_type": "group_condition"
   },
