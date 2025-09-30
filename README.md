@@ -15,6 +15,13 @@ A Python toolkit for generating and visualizing knowledge graphs from medical po
 │   ├── Patient_KG/             # Generated patient knowledge graphs
 │   ├── Patient_Rule_KG/        # Generated patient rule knowledge graphs
 │   └── Policy_CGSURG83/        # Policy data and generated visualizations
+├── Database/                   # Database management and filtering system
+│   ├── create_database.py      # Creates SQLite database from data dictionary
+│   ├── import_data.py          # Imports patient data from JSON files
+│   ├── run_filter.py           # Executes SQL queries and exports results
+│   ├── patient_data_filtered.csv # Filtered patient data results
+│   ├── policy_CGSURG83.db      # SQLite database file
+│   └── scripts/                # Database automation scripts
 ├── scripts/                    # Shell scripts for batch processing
 ├── prompts/                    # Prompt templates for data processing
 └── requirements.txt            # Python dependencies
@@ -93,6 +100,93 @@ Data field processing utilities for extracting and structuring medical data fiel
 
 ### 5. `Policy.py`
 Policy processing utilities for parsing and analyzing medical policies.
+
+## 🗄️ Database Management System
+
+The `Database/` folder contains a complete database management system for storing, importing, and filtering patient data using SQLite. This system provides a structured approach to data management and enables efficient querying of patient records against policy criteria.
+
+### Database Components
+
+#### 1. `create_database.py`
+Creates a SQLite database from a data dictionary JSON file.
+
+**Features:**
+- Automatically maps JSON field types to SQLite column types
+- Creates tables based on data dictionary structure
+- Supports custom table names and database file names
+
+**Usage:**
+```bash
+python Database/create_database.py --database policy_CGSURG83.db --dictionary ../test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --table patients
+```
+
+#### 2. `import_data.py`
+Imports patient data from JSON files into the database.
+
+**Features:**
+- Batch imports all JSON files from a directory
+- Handles patient data structure automatically
+- Uses INSERT OR REPLACE for data updates
+- Provides import status feedback
+
+**Usage:**
+```bash
+python Database/import_data.py --database policy_CGSURG83.db --data-dir ../test1/Patient_data_dictionary --table patients
+```
+
+#### 3. `run_filter.py`
+Executes SQL queries on the database and exports results in multiple formats.
+
+**Features:**
+- Supports table, CSV, and JSON output formats
+- Can save results to files
+- Handles complex SQL queries from policy files
+- Provides formatted table output
+
+**Usage:**
+```bash
+python Database/run_filter.py --database policy_CGSURG83.db --sql-file ../test1/Policy_CGSURG83/SQL_CGSURG83.txt --output csv --save patient_data_filtered.csv
+```
+
+### Database Automation Scripts
+
+The `Database/scripts/` directory contains shell scripts for automated database operations:
+
+#### `create_db.sh`
+Creates the database and table structure:
+```bash
+python create_database.py --database policy_CGSURG83.db --dictionary ../test1/Policy_CGSURG83/Data_dictionary_CGSURG83.json --table patients
+```
+
+#### `import_data.sh`
+Imports all patient data:
+```bash
+python import_data.py --database policy_CGSURG83.db --data-dir ../test1/Patient_data_dictionary --table patients
+```
+
+#### `run_filters.sh`
+Runs policy filters and exports results:
+```bash
+python run_filter.py --database policy_CGSURG83.db --sql-file ../test1/Policy_CGSURG83/SQL_CGSURG83.txt --output csv --save patient_data_filtered.csv
+```
+
+### Database Workflow
+
+1. **Create Database**: Use `create_database.py` to create the SQLite database structure
+2. **Import Data**: Use `import_data.py` to load patient data from JSON files
+3. **Run Filters**: Use `run_filter.py` to execute policy queries and export results
+
+### Sample Database Results
+
+The `patient_data_filtered.csv` file contains the results of running policy filters on the patient database. Here's a sample of the filtered data:
+
+```csv
+patient_id,patient_id,patient_age,patient_bmi,comorbidity_flag,weight_loss_program_history,conservative_therapy_attempt,preop_medical_clearance,preop_psych_clearance,preop_education_completed,treatment_plan_documented,procedure_code_CPT,procedure_code_ICD10PCS,diagnosis_code_ICD10
+200001,200001,52,42.5,0,1,1,1,1,1,1,43644,0DV60ZZ,E66.01
+200002,200002,39,36.4,1,1,1,1,1,1,1,43775,0DB60Z3,Z68.36
+200005,200005,28,34.8,1,1,1,1,1,1,1,43770,0D160ZA,E66.2
+```
+
 
 ## 🚀 Automation Scripts
 

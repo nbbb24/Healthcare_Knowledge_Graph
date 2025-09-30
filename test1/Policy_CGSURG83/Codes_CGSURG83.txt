@@ -172,14 +172,3 @@ Body mass index [BMI] pediatric [special consideration]
 
 Z98.84
 Bariatric surgery status
-
-When services are Not Medically Necessary:
-For the procedure codes listed above when criteria are not met, when the following BMI diagnosis codes are indicated, or when the code describes a procedure or situation designated in the Clinical Indications section as not medically necessary.
-
-ICD-10 Diagnosis
-
-Z68.20-Z68.29
-Body mass index [BMI] 20.0-29.9, adult
-
-Z68.30-Z68.34
-Body mass index [BMI] 30.0-34.9, adult

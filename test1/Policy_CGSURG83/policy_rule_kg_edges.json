@@ -7,12 +7,6 @@
   },
   {
     "source": "policy_center",
-    "target": "group_procedure",
-    "relation": "contains",
-    "edge_type": "policy_rule"
-  },
-  {
-    "source": "policy_center",
     "target": "group_eligibility",
     "relation": "contains",
     "edge_type": "policy_rule"
@@ -24,44 +18,8 @@
     "edge_type": "policy_rule"
   },
   {
-    "source": "policy_center",
-    "target": "group_diagnosis",
-    "relation": "contains",
-    "edge_type": "policy_rule"
-  },
-  {
     "source": "group_demographic",
     "target": "condition_patient_age_0",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_procedure",
-    "target": "condition_procedure_code_cpt_0",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_procedure",
-    "target": "condition_surgical_complication_flag_1",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_procedure",
-    "target": "condition_revision_conversion_flag_2",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_procedure",
-    "target": "condition_procedure_code_cpt_3",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_procedure",
-    "target": "condition_procedure_code_icd10_4",
     "relation": "contains",
     "edge_type": "group_condition"
   },
@@ -72,26 +30,8 @@
     "edge_type": "group_condition"
   },
   {
-    "source": "group_eligibility",
-    "target": "condition_patient_bmi_1",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_eligibility",
-    "target": "condition_patient_bmi_2",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_eligibility",
-    "target": "condition_patient_bmi_3",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
     "source": "group_requirement",
-    "target": "condition_weight_loss_program_participation_0",
+    "target": "condition_weight_loss_program_history_0",
     "relation": "contains",
     "edge_type": "group_condition"
   },
@@ -109,31 +49,19 @@
   },
   {
     "source": "group_requirement",
-    "target": "condition_preop_mental_health_clearance_3",
+    "target": "condition_preop_psych_clearance_3",
     "relation": "contains",
     "edge_type": "group_condition"
   },
   {
     "source": "group_requirement",
-    "target": "condition_preop_education_4",
+    "target": "condition_preop_education_completed_4",
     "relation": "contains",
     "edge_type": "group_condition"
   },
   {
     "source": "group_requirement",
-    "target": "condition_treatment_plan_5",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_diagnosis",
-    "target": "condition_diagnosis_code_icd10_0",
-    "relation": "contains",
-    "edge_type": "group_condition"
-  },
-  {
-    "source": "group_diagnosis",
-    "target": "condition_diagnosis_code_icd10_1",
+    "target": "condition_treatment_plan_documented_5",
     "relation": "contains",
     "edge_type": "group_condition"
   }
